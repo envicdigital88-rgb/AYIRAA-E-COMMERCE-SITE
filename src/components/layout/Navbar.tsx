@@ -63,7 +63,7 @@ export function Navbar() {
   return (
     <div className="h-20 w-full">
       <header
-        className={`z-40 w-full transition-all duration-300 bg-ivory lg:bg-ivory/70 lg:backdrop-blur-sm ${scrolled ? 'fixed top-0 shadow-soft lg:bg-ivory/90 lg:backdrop-blur-md' : 'relative top-0'}`}>
+        className={`z-40 w-full transition-all duration-300 bg-ivory lg:bg-ivory/70 lg:backdrop-blur-sm ${scrolled ? 'fixed top-0 shadow-soft lg:bg-ivory/90 lg:backdrop-blur-md' : 'fixed sm:relative top-0'}`}>
         
         <nav className="relative mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-10">
           {/* Left: mobile menu + desktop links */}
