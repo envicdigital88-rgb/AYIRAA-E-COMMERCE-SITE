@@ -176,7 +176,7 @@ export function Checkout() {
                     value={form.phone}
                     onChange={update('phone')}
                     className={inputClass}
-                    placeholder="+94 77 123 4567" />
+                    placeholder="+94 74 263 3838" />
                   
                 </div>
                 <div className="sm:col-span-2">

@@ -95,7 +95,7 @@ export function Footer() {
                   className="mt-0.5 h-4 w-4 shrink-0 text-gold-soft"
                   strokeWidth={1.5} />
                 
-                <span>+94 77 123 4567</span>
+                <span>+94 74 263 3838</span>
               </li>
               <li className="flex items-start gap-3">
                 <MailIcon
