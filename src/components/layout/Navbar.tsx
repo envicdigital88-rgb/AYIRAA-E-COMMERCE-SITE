@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -147,100 +148,92 @@ export function Navbar() {
           </div>
         </nav>
 
-        {/* Mobile drawer */}
-        <AnimatePresence>
-          {mobileOpen &&
-          <>
-              <motion.div
-              className="fixed inset-0 z-[150] bg-charcoal/30 backdrop-blur-sm lg:hidden"
-              initial={{
-                opacity: 0
-              }}
-              animate={{
-                opacity: 1
-              }}
-              exit={{
-                opacity: 0
-              }}
-              onClick={() => setMobileOpen(false)} />
-            
-              <motion.div
-              className="fixed inset-y-0 left-0 z-[200] flex w-72 flex-col bg-ivory p-6 shadow-lift lg:hidden"
-              initial={{
-                x: '-100%'
-              }}
-              animate={{
-                x: 0
-              }}
-              exit={{
-                x: '-100%'
-              }}
-              transition={{
-                type: 'spring',
-                stiffness: 300,
-                damping: 32
-              }}>
-              
-                <div className="mb-8 flex items-center justify-between">
-                  <Logo tagline={false} />
-                  <button
+        {/* Mobile drawer rendered as a top-level body portal for absolute rendering consistency */}
+        {typeof document !== 'undefined' && createPortal(
+          <AnimatePresence>
+            {mobileOpen && (
+              <>
+                <motion.div
+                  className="fixed inset-0 z-[99999] bg-charcoal/40 backdrop-blur-sm lg:hidden"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   onClick={() => setMobileOpen(false)}
-                  aria-label="Close menu">
-                  
-                    <XIcon className="h-6 w-6 text-charcoal" />
-                  </button>
-                </div>
-                <ul className="flex flex-col divide-y divide-charcoal/5">
-                  {links.map((l) => {
-                    const active = isActive(l.to);
-                    return (
-                      <li key={l.label} className="py-4 first:pt-0 last:pb-0">
-                        <Link
-                          to={l.to}
-                          className={`flex items-center justify-between font-serif text-2xl transition-colors duration-300 ${
-                            active ? 'text-gold-deep font-semibold' : 'text-charcoal/80 hover:text-gold-deep'
-                          }`}
+                />
+                
+                <motion.div
+                  className="fixed inset-y-0 left-0 z-[99999] flex w-72 flex-col bg-ivory p-6 shadow-lift lg:hidden"
+                  initial={{ x: '-100%' }}
+                  animate={{ x: 0 }}
+                  exit={{ x: '-100%' }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 300,
+                    damping: 32
+                  }}
+                >
+                  <div className="mb-8 flex items-center justify-between">
+                    <Logo tagline={false} />
+                    <button
+                      onClick={() => setMobileOpen(false)}
+                      aria-label="Close menu"
+                    >
+                      <XIcon className="h-6 w-6 text-charcoal" />
+                    </button>
+                  </div>
+                  <ul className="flex flex-col divide-y divide-charcoal/5">
+                    {links.map((l) => {
+                      const active = isActive(l.to);
+                      return (
+                        <li key={l.label} className="py-4 first:pt-0 last:pb-0">
+                          <Link
+                            to={l.to}
+                            className={`flex items-center justify-between font-serif text-2xl transition-colors duration-300 ${
+                              active ? 'text-gold-deep font-semibold' : 'text-charcoal/80 hover:text-gold-deep'
+                            }`}
+                          >
+                            <span>{l.label}</span>
+                            {active && (
+                              <span className="h-2 w-2 rounded-full bg-gold-deep" />
+                            )}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  <div className="mt-auto pt-6 border-t border-charcoal/5">
+                    <Link to="/shop">
+                      <Button fullWidth className="mb-6">Shop Now</Button>
+                    </Link>
+                    <div className="space-y-3 text-xs text-charcoal/60">
+                      <p className="flex items-center gap-2">
+                        <PhoneIcon className="h-3.5 w-3.5 text-gold-deep" />
+                        <span>+94 74 263 3838</span>
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <MailIcon className="h-3.5 w-3.5 text-gold-deep" />
+                        <span>hello@ayiraa.lk</span>
+                      </p>
+                    </div>
+                    <div className="mt-5 flex gap-3">
+                      {[InstagramIcon, FacebookIcon, TwitterIcon].map((Icon, i) =>
+                        <a
+                          key={i}
+                          href="#"
+                          aria-label="Social link"
+                          className="flex h-8 w-8 items-center justify-center rounded-full border border-charcoal/10 text-charcoal transition-colors hover:border-gold-deep hover:bg-gold-deep hover:text-white"
                         >
-                          <span>{l.label}</span>
-                          {active && (
-                            <span className="h-2 w-2 rounded-full bg-gold-deep" />
-                          )}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-                <div className="mt-auto pt-6 border-t border-charcoal/5">
-                  <Link to="/shop">
-                    <Button fullWidth className="mb-6">Shop Now</Button>
-                  </Link>
-                  <div className="space-y-3 text-xs text-charcoal/60">
-                    <p className="flex items-center gap-2">
-                      <PhoneIcon className="h-3.5 w-3.5 text-gold-deep" />
-                      <span>+94 74 263 3838</span>
-                    </p>
-                    <p className="flex items-center gap-2">
-                      <MailIcon className="h-3.5 w-3.5 text-gold-deep" />
-                      <span>hello@ayiraa.lk</span>
-                    </p>
+                          <Icon className="h-3.5 w-3.5" strokeWidth={1.5} />
+                        </a>
+                      )}
+                    </div>
                   </div>
-                  <div className="mt-5 flex gap-3">
-                    {[InstagramIcon, FacebookIcon, TwitterIcon].map((Icon, i) =>
-                      <a
-                        key={i}
-                        href="#"
-                        aria-label="Social link"
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-charcoal/10 text-charcoal transition-colors hover:border-gold-deep hover:bg-gold-deep hover:text-white"
-                      >
-                        <Icon className="h-3.5 w-3.5" strokeWidth={1.5} />
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            </>
-          }
-        </AnimatePresence>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>,
+          document.body
+        )}
     </header>
   );
 }
