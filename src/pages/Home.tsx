@@ -6,6 +6,7 @@ import { WhyChoose } from '../components/sections/WhyChoose';
 import { Benefits } from '../components/sections/Benefits';
 import { Testimonials } from '../components/sections/Testimonials';
 import { PaymentMethods } from '../components/sections/PaymentMethods';
+import { SkincareRitual } from '../components/sections/SkincareRitual';
 import { DeliveryInfo } from '../components/sections/DeliveryInfo';
 import { InstagramGallery } from '../components/sections/InstagramGallery';
 import { Newsletter } from '../components/sections/Newsletter';
@@ -19,6 +20,7 @@ export function Home() {
       <Benefits />
       <Testimonials />
       <PaymentMethods />
+      <SkincareRitual />
       <DeliveryInfo />
       <InstagramGallery />
       <Newsletter />
