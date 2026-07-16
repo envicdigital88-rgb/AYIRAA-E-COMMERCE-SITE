@@ -152,7 +152,7 @@ export function Navbar() {
           {mobileOpen &&
           <>
               <motion.div
-              className="fixed inset-0 z-40 bg-charcoal/30 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-[150] bg-charcoal/30 backdrop-blur-sm lg:hidden"
               initial={{
                 opacity: 0
               }}
@@ -165,7 +165,7 @@ export function Navbar() {
               onClick={() => setMobileOpen(false)} />
             
               <motion.div
-              className="fixed inset-y-0 left-0 z-50 flex w-72 flex-col bg-ivory p-6 shadow-lift lg:hidden"
+              className="fixed inset-y-0 left-0 z-[200] flex w-72 flex-col bg-ivory p-6 shadow-lift lg:hidden"
               initial={{
                 x: '-100%'
               }}

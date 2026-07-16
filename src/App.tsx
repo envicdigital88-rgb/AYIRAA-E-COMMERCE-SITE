@@ -18,15 +18,6 @@ export function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Disable body scroll when loading
-    if (loading) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [loading]);
-
-  useEffect(() => {
     // Keep loader active for 2.2 seconds to allow the flower blowing animation to be enjoyed, then fade out
     const timer = setTimeout(() => {
       setLoading(false);
@@ -42,13 +33,14 @@ export function App() {
           {loading && <Preloader key="loader" />}
         </AnimatePresence>
 
-        <div className="flex min-h-screen w-full flex-col bg-ivory">
+        {/* Fixed top bar: outside the flex container for absolute stability on mobile scrolling */}
+        <div className="fixed top-0 left-0 right-0 z-[100] transform-gpu">
+          <AnnouncementBar />
+          <Navbar />
+        </div>
+
+        <div className={`flex min-h-screen w-full flex-col bg-ivory overflow-x-hidden ${loading ? 'overflow-hidden' : ''}`}>
           <ScrollToTop />
-          {/* Fixed top bar: AnnouncementBar (hidden on mobile) + Navbar, always pinned */}
-          <div className="fixed top-0 left-0 right-0 z-50">
-            <AnnouncementBar />
-            <Navbar />
-          </div>
           {/* Content offset: sm+ has announcement bar (h-10) + navbar (h-20) = 7.5rem, mobile just navbar h-20 */}
           <div className="flex-1 pt-20 sm:pt-[7.5rem]">
             <Routes>
