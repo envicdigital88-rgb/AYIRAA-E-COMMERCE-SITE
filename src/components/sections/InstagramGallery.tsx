@@ -1,8 +1,11 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { InstagramIcon } from 'lucide-react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { Button } from '../ui/Button';
+
+const INSTAGRAM_URL = 'https://www.instagram.com/ayiraa.lk/';
+
 const images = [
   "/image6.png",
   "/image7.png",
@@ -11,8 +14,6 @@ const images = [
   "/image3.png",
   "/image2.png",
 ];
-
-
 
 
 
@@ -30,7 +31,9 @@ export function InstagramGallery() {
           {images.map((src, i) =>
           <motion.a
             key={i}
-            href="#"
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             initial={{
               opacity: 0,
               scale: 0.92
@@ -63,9 +66,15 @@ export function InstagramGallery() {
           )}
         </div>
         <div className="mt-10 flex justify-center">
-          <Button variant="outline">
-            <InstagramIcon className="h-4 w-4" /> Follow @Ayiraa.lk
-          </Button>
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button variant="outline">
+              <InstagramIcon className="h-4 w-4" /> Follow @ayiraa.lk
+            </Button>
+          </a>
         </div>
       </div>
     </section>);
